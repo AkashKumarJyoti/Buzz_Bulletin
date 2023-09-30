@@ -17,11 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Welcome(context);
+    welcome(context);
   }
 
-  Future<void> Welcome(BuildContext context) async {
-    Timer(const Duration(seconds: 2), () async {
+  Future<void> welcome(BuildContext context) async {
+    Timer(const Duration(seconds: 2), () async {   // This will show the splash screen for 2 seconds then HomeScreen will open
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     });
   }
@@ -54,12 +54,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 children: <Widget>[
                   CircleAvatar(
                     radius: 55,
-                    backgroundColor: Color(0xFF009688),
                     child: ClipOval(
                       child: SizedBox(
                         height: 100,
                         width: 100,
-                        child: Image.asset('images/news_app.jpg', fit: BoxFit.cover),
+                        child: Image.asset('images/news_app.png', fit: BoxFit.cover),
                       ),
                     ),
                   ),

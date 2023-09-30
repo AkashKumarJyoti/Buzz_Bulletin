@@ -1,7 +1,6 @@
-// The data which i am getting through fetchNews method is quite complex, so to make it easily accessible we need data modelling
-
 import 'package:intl/intl.dart';
 
+// The data which i am getting through fetchNews method is quite complex, so to make it easily accessible we need data modelling
 class NewsArt
 {
   String imgUrl;
@@ -15,7 +14,6 @@ class NewsArt
 
   static NewsArt fromAPItoApp(Map<String, dynamic> article)
   {
-
     return NewsArt(
         imgUrl: article["urlToImage"] ?? "images/breaking_news.jpg",
         newsHead: article["title"] ?? "--",    // Default value is given to prevent the app from crash when data is not available
@@ -26,6 +24,7 @@ class NewsArt
     );
   }
 
+  // It will format the date from the api data
   static String timeformat(Map<String, dynamic> article)
   {
     String timeStamp = article['publishedAt'];

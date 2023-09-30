@@ -1,9 +1,8 @@
-// https://newsapi.org/v2/top-headlines?sources=google-news-in&apiKey=b60e98b4ff5748039173136b19cc0ed7
-// https://newsapi.org/v2/top-headlines?country=in&language=en&apiKey=${apikey}
 import 'dart:convert';
 import 'dart:math';
 import 'package:buzz_bulletin/model/newsArt.dart';
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 
 class FetchNews
 {
@@ -46,7 +45,7 @@ class FetchNews
     final randomSourceId = Random();
     var sourceId = sourcesId[randomSourceId.nextInt(sourcesId.length)];
 
-    var finalUrl = "https://newsapi.org/v2/top-headlines?sources=$sourceId&apiKey=b60e98b4ff5748039173136b19cc0ed7";
+    var finalUrl = "https://newsapi.org/v2/top-headlines?sources=$sourceId&apiKey=51a1b898dc5e46bda0a4d9d786d6d5ce";
     Response response = await get(Uri.parse(finalUrl));
     if(response.statusCode == 200)  // It indicates that HTTP request was successful
     {
@@ -62,7 +61,79 @@ class FetchNews
     }
     else
     {
-      throw Exception("Error getting News data");
+      print('HTTP Error: ${response.statusCode}');
+      print('Response Body: ${response.body}');
+      throw Exception('Error getting News data');
+    }
+  }
+
+  // word search
+  static Future<NewsArt> search({required String word}) async
+  {
+    // We need to give 1 month before the today's date
+    DateTime currentDate = DateTime.now();
+    DateTime oneMonthAgo = currentDate.subtract(const Duration(days: 30));
+    String formattedDate = DateFormat('yyyy-MM-dd').format(oneMonthAgo);
+
+    // It will give the data that is related to the search word in english language
+    var finalUrl = "https://newsapi.org/v2/everything?q=$word&from=$formattedDate&sortBy=publishedAt&language=en&apiKey=51a1b898dc5e46bda0a4d9d786d6d5ce";
+
+    Response response = await get(Uri.parse(finalUrl));
+    print("URL: ${Uri.encodeFull(finalUrl)}");
+    if(response.statusCode == 200)
+    {
+      Map body_data = jsonDecode(response.body);
+      List articles = body_data["articles"];
+      final randomArticles = Random();
+      var myArticle = articles[randomArticles.nextInt(articles.length)];
+      return NewsArt.fromAPItoApp(myArticle);
+    }
+    else
+    {
+      print('HTTP Error: ${response.statusCode}');
+      print('Response Body: ${response.body}');
+      throw Exception("Error getting News data words");
+    }
+  }
+
+  // Category wise selection of news
+  static Future<NewsArt> categorySearch({required String category}) async
+  {
+    var finalUrl = "https://newsapi.org/v2/top-headlines?country=in&category=$category&apiKey=51a1b898dc5e46bda0a4d9d786d6d5ce";
+
+    Response response = await get(Uri.parse(finalUrl));
+    print("URL: ${Uri.encodeFull(finalUrl)}");
+    if(response.statusCode == 200)
+    {
+      Map body_data = jsonDecode(response.body);
+      List articles = body_data["articles"];
+      final randomArticles = Random();
+      var myArticle = articles[randomArticles.nextInt(articles.length)];
+      return NewsArt.fromAPItoApp(myArticle);
+    }
+    else
+    {
+      throw Exception("Error getting News data category wise");
+    }
+  }
+
+  // Top headlines
+  static Future<NewsArt> headlines() async
+  {
+    var finalUrl = "https://newsapi.org/v2/top-headlines?country=in&language=en&apiKey=51a1b898dc5e46bda0a4d9d786d6d5ce";
+    Response response = await get(Uri.parse(finalUrl));
+    print("URL: ${Uri.encodeFull(finalUrl)}");
+    if(response.statusCode == 200)
+    {
+      Map body_data = jsonDecode(response.body);
+      List articles = body_data["articles"];
+      final randomArticles = Random();
+      var myArticle = articles[randomArticles.nextInt(articles.length)];
+      return NewsArt.fromAPItoApp(myArticle);
+    }
+    else
+    {
+      throw Exception("Error getting News top headlines");
     }
   }
 }

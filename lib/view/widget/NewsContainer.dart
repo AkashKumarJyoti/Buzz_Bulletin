@@ -28,9 +28,11 @@ class _NewsContainerState extends State<NewsContainer> {
   @override
   void initState() {
     super.initState();
-    widget.imgUrl.contains("https:////")
-        ? widget.imgUrl.replaceAll("https:////", "https://")
-        : widget.imgUrl;
+    if (widget.imgUrl.contains("https:////")) {   // Some images url are badly formatted
+      setState(() {
+        widget.imgUrl = widget.imgUrl.replaceAll("https:////", "https://");
+      });
+    }
   }
 
   @override
@@ -41,18 +43,35 @@ class _NewsContainerState extends State<NewsContainer> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            widget.imgUrl == 'images/breaking_news.jpg'
-                ? Image.asset('images/breaking_news.jpg',
-                    height: 350, width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover
-            )
-                : FadeInImage(
-                    height: 350,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover,
-                    placeholder: const AssetImage('images/breaking_news.jpg'),
-                    image: NetworkImage(
-                        widget.imgUrl), // Use the corrected URL here
+            widget.imgUrl == 'images/breaking_news.jpg'     // If condition true then show this image
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        'images/breaking_news.jpg',
+                        height: 200,
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  )
+                : Padding(                                // Show FadeInImage
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: FadeInImage(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.cover,
+                        placeholder: const AssetImage('images/breaking_news.jpg'),
+                        image: NetworkImage(widget.imgUrl),
+                        imageErrorBuilder: (context, error, stackTrace)
+                        {
+                          return Image.asset('images/breaking_news.jpg');        // It will handle if the url image does not exist
+                        },
+                      ),
+                    ),
                   ),
             const SizedBox(height: 20.0),
             Padding(
@@ -69,7 +88,8 @@ class _NewsContainerState extends State<NewsContainer> {
                     ],
                   ),
                   const SizedBox(height: 4.0),
-                  HtmlWidget(       // Using HtmlWidget instead of Text because some data may contain in the form of html
+                  HtmlWidget(
+                      // Using HtmlWidget instead of Text because some data may contain in the form of html
                       widget.newsHead.length > 70
                           ? "${widget.newsHead.substring(0, 70)}...."
                           : widget.newsHead,
@@ -111,8 +131,10 @@ class _NewsContainerState extends State<NewsContainer> {
               ],
             ),
             const SizedBox(
-              height: 20.0,
-            )
+              height: 10.0,
+            ),
+            const Center(child: Icon(Icons.keyboard_double_arrow_down_outlined, color: Colors.deepPurple)),
+            const SizedBox(height: 10.0)
           ],
         ));
   }
