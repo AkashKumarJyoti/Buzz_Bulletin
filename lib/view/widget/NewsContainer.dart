@@ -43,6 +43,8 @@ class _NewsContainerState extends State<NewsContainer> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+
+            // News Image
             widget.imgUrl == 'images/breaking_news.jpg'     // If condition true then show this image
                 ? Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
@@ -79,6 +81,8 @@ class _NewsContainerState extends State<NewsContainer> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+
+                  // News published date
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -88,6 +92,8 @@ class _NewsContainerState extends State<NewsContainer> {
                     ],
                   ),
                   const SizedBox(height: 4.0),
+
+                  // Headline
                   HtmlWidget(
                       // Using HtmlWidget instead of Text because some data may contain in the form of html
                       widget.newsHead.length > 70
@@ -98,10 +104,14 @@ class _NewsContainerState extends State<NewsContainer> {
                         fontWeight: FontWeight.bold,
                       )),
                   const SizedBox(height: 10.0),
+
+                  // News Description
                   HtmlWidget(widget.newsDesc,
                       textStyle:
                           const TextStyle(fontSize: 12, color: Colors.black38)),
                   const SizedBox(height: 10.0),
+
+                  // News Content
                   HtmlWidget(
                       widget.newsContent != "--"
                           ? widget.newsContent.length > 250
@@ -113,6 +123,8 @@ class _NewsContainerState extends State<NewsContainer> {
               ),
             ),
             const Spacer(),
+
+            // bottom part -> Read more, down arrow button
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
