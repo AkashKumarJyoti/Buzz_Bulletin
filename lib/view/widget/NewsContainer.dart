@@ -66,7 +66,7 @@ class _NewsContainerState extends State<NewsContainer> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: FadeInImage(
-                    height: MediaQuery.of(context).size.height/3,
+                    height: MediaQuery.of(context).size.height/4,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.cover,
                     placeholder: const AssetImage('images/breaking_news.jpg'),
@@ -75,7 +75,7 @@ class _NewsContainerState extends State<NewsContainer> {
                     {
                       return Image.asset(
                         'images/breaking_news.jpg',
-                        height: MediaQuery.of(context).size.height/3,
+                        height: MediaQuery.of(context).size.height/4,
                         width: MediaQuery.of(context).size.width,
                         fit: BoxFit.cover,
                       );
@@ -118,7 +118,7 @@ class _NewsContainerState extends State<NewsContainer> {
                             ? "${widget.newsHead.substring(0, 70)}...."
                             : widget.newsHead,
                         textStyle: TextStyle(
-                          fontSize: screenheight/30,
+                          fontSize: screenheight/40,
                           fontWeight: FontWeight.bold,
                         )),
                   ),
@@ -131,7 +131,7 @@ class _NewsContainerState extends State<NewsContainer> {
                     visible: screenheight >= 455,
                     child: HtmlWidget(widget.newsDesc,
                         textStyle:
-                            TextStyle(fontSize: screenheight/60, color: Colors.black38)),
+                            TextStyle(fontSize: screenheight/70, color: Colors.black38)),
                   ),
                   Visibility(
                       visible: screenheight >= 250,
@@ -146,7 +146,7 @@ class _NewsContainerState extends State<NewsContainer> {
                                 ? "${widget.newsContent.substring(0, 250)}...."
                                 : "${widget.newsContent.substring(0, widget.newsContent.length - 15)}...."
                             : widget.newsContent,
-                        textStyle: TextStyle(fontSize: screenheight/45)),
+                        textStyle: TextStyle(fontSize: screenheight/50)),
                   )
                 ],
               ),

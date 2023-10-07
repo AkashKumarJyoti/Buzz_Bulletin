@@ -45,7 +45,7 @@ class FetchNews
     final randomSourceId = Random();
     var sourceId = sourcesId[randomSourceId.nextInt(sourcesId.length)];
 
-    var finalUrl = "https://newsapi.org/v2/top-headlines?sources=$sourceId&apiKey=51a1b898dc5e46bda0a4d9d786d6d5ce";
+    var finalUrl = "https://newsapi.org/v2/top-headlines?sources=$sourceId&apiKey=b60e98b4ff5748039173136b19cc0ed7";
     Response response = await get(Uri.parse(finalUrl));
     if(response.statusCode == 200)  // It indicates that HTTP request was successful
     {
@@ -76,7 +76,7 @@ class FetchNews
     String formattedDate = DateFormat('yyyy-MM-dd').format(oneMonthAgo);
 
     // It will give the data that is related to the search word in english language
-    var finalUrl = "https://newsapi.org/v2/everything?q=$word&from=$formattedDate&sortBy=publishedAt&language=en&apiKey=51a1b898dc5e46bda0a4d9d786d6d5ce";
+    var finalUrl = "https://newsapi.org/v2/everything?q=$word&from=$formattedDate&sortBy=publishedAt&language=en&apiKey=b60e98b4ff5748039173136b19cc0ed7";
 
     Response response = await get(Uri.parse(finalUrl));
     print("URL: ${Uri.encodeFull(finalUrl)}");
@@ -99,7 +99,7 @@ class FetchNews
   // Category wise selection of news
   static Future<NewsArt> categorySearch({required String category}) async
   {
-    var finalUrl = "https://newsapi.org/v2/top-headlines?country=in&category=$category&apiKey=51a1b898dc5e46bda0a4d9d786d6d5ce";
+    var finalUrl = "https://newsapi.org/v2/top-headlines?country=in&category=$category&apiKey=b60e98b4ff5748039173136b19cc0ed7";
 
     Response response = await get(Uri.parse(finalUrl));
     print("URL: ${Uri.encodeFull(finalUrl)}");
@@ -120,7 +120,7 @@ class FetchNews
   // Top headlines
   static Future<NewsArt> headlines() async
   {
-    var finalUrl = "https://newsapi.org/v2/top-headlines?country=in&language=en&apiKey=51a1b898dc5e46bda0a4d9d786d6d5ce";
+    var finalUrl = "https://newsapi.org/v2/top-headlines?country=in&language=en&apiKey=b60e98b4ff5748039173136b19cc0ed7";
     Response response = await get(Uri.parse(finalUrl));
     print("URL: ${Uri.encodeFull(finalUrl)}");
     if(response.statusCode == 200)
