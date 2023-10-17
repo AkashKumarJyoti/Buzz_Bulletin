@@ -1,16 +1,13 @@
-# buzz_bulletin
+# Buzz Bulletin News App
 
-A new Flutter project.
+Stay informed with the Buzz Bulletin news app. Explore breaking news, top headlines, and articles across various categories like business, entertainment, health, science, sports, and technology. Search for news on topics that matter to you and enjoy a seamless reading experience with web view integration.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Breaking news and top headlines in various categories.
+- Search for news articles on topics of interest.
+- Web view integration for a seamless reading experience.
+- Responsive design for various devices and screen sizes.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
